@@ -89,6 +89,11 @@ col2.metric(
 
 col3.metric(
     "ROE",
+    f"{roe:.1f}%" if pd.notna(roe) else "N/A"
+)
+
+col3.metric(
+    "ROE",
     f"{roe:.1%}" if pd.notna(roe) else "N/A"
 )
 
@@ -227,13 +232,13 @@ else:
 # ================= ФИНАНСЫ =================
 
 if pd.notna(company["roe"]):
-    if company["roe"] >= 0.15:
+    if company["roe"] >= 15:
         finance_score += 4
         score += 2
         strengths.append("высокая рентабельность капитала")
         reasons.append("высокая рентабельность")
 
-    elif company["roe"] >= 0.08:
+    elif company["roe"] >= 8:
         finance_score += 2
         score += 1
 
