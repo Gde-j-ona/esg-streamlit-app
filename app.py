@@ -205,26 +205,41 @@ risks = []
 reasons = []
 
 # ================= ESG =================
+q25 = sector_df["total_score"].quantile(0.25)
+q50 = sector_df["total_score"].quantile(0.50)
+q75 = sector_df["total_score"].quantile(0.75)
+q90 = sector_df["total_score"].quantile(0.90)
 
-if company["total_score"] >= 80:
+company_esg = company["total_score"]
+
+if company_esg >= q90:
     esg_score = 10
     score += 3
-    strengths.append("очень высокий ESG-рейтинг")
-    reasons.append("высокий ESG-рейтинг")
+    strengths.append("ESG-рейтинг входит в топ-10% сектора")
+    reasons.append("один из лучших ESG-показателей в секторе")
+    esg_level = "Топ 10% сектора"
 
-elif company["total_score"] >= 70:
+elif company_esg >= q75:
     esg_score = 8
     score += 2
-    strengths.append("высокий ESG-рейтинг")
+    strengths.append("высокий ESG-рейтинг относительно сектора")
     reasons.append("высокий ESG-рейтинг")
+    esg_level = "Выше среднего"
 
-elif company["total_score"] >= 50:
+elif company_esg >= q50:
     esg_score = 6
     score += 1
+    esg_level = "Средний"
+
+elif company_esg >= q25:
+    esg_score = 4
+    risks.append("ESG ниже среднего по сектору")
+    esg_level = "Ниже среднего"
 
 else:
-    esg_score = 3
-    risks.append("низкий ESG-рейтинг")
+    esg_score = 2
+    risks.append("низкий ESG-рейтинг относительно сектора")
+    esg_level = "Нижние 25% сектора"
 
 # ================= ФИНАНСЫ =================
 
