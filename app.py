@@ -92,11 +92,6 @@ col3.metric(
     f"{roe:.1f}%" if pd.notna(roe) else "N/A"
 )
 
-col3.metric(
-    "ROE",
-    f"{roe:.1%}" if pd.notna(roe) else "N/A"
-)
-
 col4.metric(
     "P/E Ratio",
     f"{pe:.2f}" if pd.notna(pe) else "N/A"
