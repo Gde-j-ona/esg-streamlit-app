@@ -65,6 +65,8 @@ ticker = st.sidebar.selectbox(
 )
 
 company = sector_df[sector_df["ticker"] == ticker].iloc[0]
+company_name = company["name"]
+st.subheader(f"{company_name} ({ticker})")
 
 # =========================
 # KPI
