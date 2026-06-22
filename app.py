@@ -382,7 +382,7 @@ risk_norm = risk_score / 10
 
 roe_norm = 0
 if pd.notna(company["roe"]):
-    roe_norm = np.clip(company["roe"] / 0.30, 0, 1)
+    roe_norm = np.clip(company["roe"] / 30, 0, 1)
 
 debt_norm = 0
 if pd.notna(company["debt_to_capital"]):
