@@ -18,6 +18,29 @@ def load_data():
 
 df = load_data()
 
+def format_market_cap(value):
+    if pd.isna(value):
+        return "N/A"
+
+    # триллионы
+    if value >= 1e12:
+        return f"${value / 1e12:.2f}T"
+
+    # миллиарды
+    elif value >= 1e9:
+        return f"${value / 1e9:.2f}B"
+
+    # миллионы
+    elif value >= 1e6:
+        return f"${value / 1e6:.2f}M"
+
+    # тысячи
+    elif value >= 1e3:
+        return f"${value / 1e3:.2f}K"
+
+    else:
+        return f"${value:.2f}"
+
 st.title("💼 ESG Инвестиционный Дашборд")
 
 # =========================
@@ -55,7 +78,7 @@ roe = company["roe"]
 
 col1.metric(
     "Рыночная капитализация",
-    f"{market_cap:.1f}B" if pd.notna(market_cap) else "N/A"
+    format_market_cap(market_cap)
 )
 
 col2.metric(
